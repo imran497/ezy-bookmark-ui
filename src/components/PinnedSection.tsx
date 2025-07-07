@@ -1,6 +1,6 @@
 import { APITool } from '@/types/api';
 import ToolCard from './ToolCard';
-import { Pin } from 'lucide-react';
+// import { Pin } from 'lucide-react';
 import { useUser } from '@clerk/nextjs';
 
 interface PinnedSectionProps {
