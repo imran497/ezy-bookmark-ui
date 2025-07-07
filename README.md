@@ -1,36 +1,139 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🔖 EzyBookmark Frontend
+
+> AI-powered bookmark management with intelligent categorization and seamless user experience
+
+A Next.js application where users can discover, bookmark, and organize AI tools effortlessly. Features intelligent categorization, click analytics, and personal collections with a beautiful, responsive interface.
+
+## Features
+
+- 🤖 **AI-Powered Categorization**: Automatic tool categorization into 9 categories
+- 🔍 **Smart Search**: Search by name, description, tags, or category
+- 🏷️ **Multi-Category Filtering**: Filter by multiple categories simultaneously
+- 📌 **Personal Collections**: Save and pin your favorite tools for quick access
+- 📊 **Usage Analytics**: Real-time click tracking and usage statistics
+- 🎨 **Beautiful Interface**: Clean, responsive design with smooth animations
+- 🔐 **Secure Authentication**: Clerk integration for user management
+- 📱 **Mobile Optimized**: Perfect experience on all devices
+- ⚡ **Fast Performance**: Optimized with Next.js 15 and Turbopack
+
+## Technologies Used
+
+- **Next.js 15**: React framework with App Router and Turbopack
+- **TypeScript**: Type-safe development
+- **Tailwind CSS**: Utility-first CSS framework with DaisyUI components
+- **Clerk**: Authentication and user management
+- **Lucide Icons**: Beautiful, consistent icon library
+- **EzyBookmark API**: Custom NestJS backend for data management
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 18+ 
+- EzyBookmark API running on port 3001
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Installation
+
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+2. **Environment Setup**:
+   ```bash
+   # Create .env.local file
+   NEXT_PUBLIC_API_URL=http://localhost:3001/api
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+   ```
+
+3. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser**:
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── page.tsx          # Main page component
+│   ├── layout.tsx        # Root layout
+│   └── globals.css       # Global styles
+├── components/
+│   ├── ToolCard.tsx      # Individual tool display with favicon
+│   ├── AddToolModal.tsx  # Form to add new tools
+│   ├── SearchBar.tsx     # Search functionality
+│   └── StatsSection.tsx  # Usage statistics display
+└── lib/
+    ├── types.ts          # TypeScript interfaces
+    ├── data.ts           # Initial data and categories
+    └── favicon.ts        # Favicon fetching utilities
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Browse Tools**: View all available AI tools on the main page
+2. **Search**: Use the search bar to find specific tools
+3. **Filter**: Select a category to filter tools
+4. **Pin Tools**: Click the star icon to pin/unpin tools
+5. **Add Tools**: Click "Add Tool" to submit a new AI tool
+6. **Visit Tools**: Click "Visit" to go to the tool's website (increments usage count)
+7. **View Stats**: See platform statistics including most popular tools and categories
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Architecture
 
-## Learn More
+EzyBookmark uses a modern, scalable architecture:
 
-To learn more about Next.js, take a look at the following resources:
+- **Frontend**: Next.js 15 with TypeScript and Tailwind CSS
+- **Backend**: NestJS API with PostgreSQL database
+- **Authentication**: Clerk for secure user management
+- **Database**: PostgreSQL with Prisma ORM
+- **Deployment**: Vercel (Frontend) + Railway (Backend) + Supabase (Database)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Key Features in Detail
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🤖 AI-Powered Categorization
+- Automatic categorization into 9 categories
+- Smart URL validation and metadata extraction
+- Enhanced fallback for sites with anti-bot protection
 
-## Deploy on Vercel
+### 📊 Analytics & Insights
+- Real-time click tracking
+- Usage statistics per tool
+- Popular tools rankings
+- Category distribution insights
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🔐 Security & Performance
+- Clerk authentication integration
+- Rate limiting and CORS protection
+- Optimized API calls with caching
+- Responsive design with smooth animations
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+### Frontend (Vercel)
+```bash
+# Build and deploy
+npm run build
+vercel --prod
+```
+
+### Environment Variables
+```bash
+NEXT_PUBLIC_API_URL=https://your-api.railway.app/api
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_live_...
+```
+
+## Contributing
+
+We welcome contributions! Please feel free to:
+- Report bugs or suggest features
+- Improve the UI/UX design
+- Add new functionality
+- Enhance performance and accessibility
+
+---
+
+**EzyBookmark** - Making bookmark management effortless with AI

@@ -1,0 +1,7 @@
+<svg width="140" height="32" viewBox="0 0 140 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bookmark Icon -->
+  <path d="M4 2C3.44772 2 3 2.44772 3 3V30L12 24L21 30V3C21 2.44772 20.5523 2 20 2H4Z" fill="#FF8C42"/>
+  
+  <!-- Text -->
+  <text x="30" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="600" fill="#1F2937">EzyBookmark</text>
+</svg>
