@@ -1,4 +1,5 @@
-import { X } from 'lucide-react';
+import { useState } from 'react';
+import { ChevronDown, ChevronUp, Filter } from 'lucide-react';
 
 interface CategoryFilterProps {
   categories: string[];
@@ -6,65 +7,65 @@ interface CategoryFilterProps {
   selectedCategories: string[];
   onCategoryToggle: (category: string) => void;
   onClearAll: () => void;
+  isExpanded?: boolean;
 }
 
-export default function CategoryFilter({ 
-  categories, 
+export default function CategoryFilter({
+  categories,
   categoryCounts,
-  selectedCategories, 
-  onCategoryToggle, 
-  onClearAll 
+  selectedCategories,
+  onCategoryToggle,
+  onClearAll,
+  isExpanded = false
 }: CategoryFilterProps) {
-  if (categories.length === 0) {
-    return null;
-  }
+  
+  if (categories.length === 0) return null;
 
+  const hasActiveFilters = selectedCategories.length > 0;
+  
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-gray-900">Categories</h3>
-        {selectedCategories.length > 0 && (
-          <button
-            onClick={onClearAll}
-            className="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1 cursor-pointer"
-          >
-            <X className="w-4 h-4" />
-            Clear all
-          </button>
-        )}
-      </div>
-      
-      <div className="flex flex-wrap gap-2 justify-center">
-        {categories.map((category) => {
-          const isSelected = selectedCategories.includes(category);
-          const count = categoryCounts[category] || 0;
-          
-          return (
-            <button
-              key={category}
-              onClick={() => onCategoryToggle(category)}
-              className={`inline-flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer ${
-                isSelected
-                  ? 'bg-blue-600 text-white shadow-md hover:bg-blue-700'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-sm'
-              }`}
-            >
-              <span>{category}</span>
-              <span className={`px-1.5 py-0.5 rounded-full text-xs ${
-                isSelected 
-                  ? 'bg-blue-500 text-white' 
-                  : 'bg-gray-200 text-gray-600'
-              }`}>
-                {count}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-      
-      {selectedCategories.length > 0 && (
-        <div className="text-sm text-gray-500">
-          {selectedCategories.length} of {categories.length} categories selected
+    <div className="mb-6">
+      {/* Expanded Filter Options - Show on both desktop and mobile */}
+      {isExpanded && (
+        <div className="mt-4 px-4">
+          <div className="bg-white p-4">
+            {/* Clear all button - only show when filters are active */}
+            {hasActiveFilters && (
+              <div className="flex justify-between items-center mb-3 pb-3 border-b border-gray-100">
+                <span className="text-sm text-gray-600">
+                  {selectedCategories.length} of {categories.length} categories selected
+                </span>
+                <button
+                  onClick={onClearAll}
+                  className="text-xs font-medium text-blue-600 hover:text-blue-700 transition-colors"
+                >
+                  Clear all
+                </button>
+              </div>
+            )}
+            
+            {/* Category filter badges */}
+            <div className="flex flex-wrap justify-center gap-2">
+              {categories.map((category) => {
+                const isSelected = selectedCategories.includes(category);
+                const count = categoryCounts[category] || 0;
+                
+                return (
+                  <button
+                    key={category}
+                    onClick={() => onCategoryToggle(category)}
+                    className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors ${
+                      isSelected
+                        ? 'bg-blue-500 text-white hover:bg-blue-600'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    {category} ({count})
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
       )}
     </div>

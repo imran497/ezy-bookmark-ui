@@ -9,6 +9,9 @@ interface CategorySectionProps {
   pinnedToolIds: string[];
   onVisit: (toolId: string) => void;
   onTogglePin: (toolId: string) => void;
+  isSelectionMode?: boolean;
+  selectedToolIds?: string[];
+  onToggleSelection?: (toolId: string) => void;
 }
 
 export default function CategorySection({ 
@@ -16,7 +19,10 @@ export default function CategorySection({
   tools, 
   pinnedToolIds, 
   onVisit, 
-  onTogglePin 
+  onTogglePin,
+  isSelectionMode = false,
+  selectedToolIds = [],
+  onToggleSelection
 }: CategorySectionProps) {
   const [showAll, setShowAll] = useState(false);
   
@@ -66,7 +72,9 @@ export default function CategorySection({
             tool={tool}
             isPinned={pinnedToolIds.includes(tool.id)}
             onVisit={onVisit}
-            onTogglePin={onTogglePin}
+            isSelectionMode={isSelectionMode}
+            isSelected={selectedToolIds.includes(tool.id)}
+            onToggleSelection={onToggleSelection}
           />
         ))}
       </div>

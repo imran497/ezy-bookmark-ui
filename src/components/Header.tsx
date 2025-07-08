@@ -28,7 +28,7 @@ export default function Header() {
   return (
     <div className="bg-white border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-shrink-0">
           <Image
             src="/logo.svg"
             alt="EzyBookmark"
@@ -38,8 +38,8 @@ export default function Header() {
           />
         </div>
         {isSignedIn ? (
-          <div className="flex items-center gap-3">
-            <span className="text-sm text-gray-600">
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <span className="text-sm text-gray-600 hidden sm:block">
               Welcome, {user.firstName || user.emailAddresses[0].emailAddress}
             </span>
             <div className="relative" ref={menuRef}>

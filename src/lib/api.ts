@@ -147,6 +147,12 @@ class ApiClient {
     });
   }
 
+  async bulkTogglePin(toolIds: string[], isPinned: boolean): Promise<Bookmark[]> {
+    // Since the backend doesn't support bulk operations yet, we'll do individual calls
+    const promises = toolIds.map(toolId => this.togglePin(toolId, isPinned));
+    return Promise.all(promises);
+  }
+
   async removeBookmark(toolId: string): Promise<void> {
     return this.request<void>(`/bookmarks/${toolId}`, {
       method: 'DELETE',
