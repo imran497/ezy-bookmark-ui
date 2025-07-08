@@ -34,7 +34,7 @@ export default function Header() {
             alt="EzyBookmark"
             width={160}
             height={32}
-            className="h-8 w-auto"
+            className="h-8"
           />
         </div>
         {isSignedIn ? (
