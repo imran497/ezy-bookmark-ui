@@ -446,7 +446,7 @@ export default function Home() {
           <button
             onClick={() => setShowAddModal(true)}
             className="btn btn-circle btn-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 border-0 text-white shadow-2xl hover:shadow-xl transition-all duration-300 hover:scale-110 cursor-pointer"
-            title="Add new AI tool"
+            title="Add new tool"
           >
             <Plus className="w-6 h-6" />
           </button>

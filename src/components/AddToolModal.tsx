@@ -95,7 +95,7 @@ export default function AddToolModal({ onClose, onAdd, categories = [] }: AddToo
             <div className="w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center mr-3">
               <Plus className="w-4 h-4" />
             </div>
-            Add AI Tool
+            Add Tool
           </h3>
           <button
             onClick={onClose}
