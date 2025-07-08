@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from '@clerk/nextjs';
 import { ToastProvider } from '@/components/Toast';
 import { ApiProvider } from '@/components/ApiProvider';
+import Footer from '@/components/Footer';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -57,7 +58,12 @@ export default function RootLayout({
         >
           <ToastProvider>
             <ApiProvider>
-              {children}
+              <div className="min-h-screen flex flex-col">
+                <main className="flex-1">
+                  {children}
+                </main>
+                <Footer />
+              </div>
             </ApiProvider>
           </ToastProvider>
         </body>

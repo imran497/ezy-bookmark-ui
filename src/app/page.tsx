@@ -10,7 +10,6 @@ import CategoryFilter from '@/components/CategoryFilter';
 import FilterHeaderButton from '@/components/FilterHeaderButton';
 import ToolsHeaderActions from '@/components/ToolsHeaderActions';
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import SearchBar from '@/components/SearchBar';
 import { Plus, Search } from 'lucide-react';
 import { useUser } from '@clerk/nextjs';
@@ -476,7 +475,6 @@ export default function Home() {
           onDone={handleDoneUnpinSelection}
         />
       </main>
-      <Footer />
     </div>
   );
 }
