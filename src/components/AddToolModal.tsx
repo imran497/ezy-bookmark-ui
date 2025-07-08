@@ -108,7 +108,7 @@ export default function AddToolModal({ onClose, onAdd, categories = [] }: AddToo
 
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
           <span className="text-sm text-blue-800">
-            We'll verify the website exists and automatically extract the tool name and icon.
+            We&apos;ll verify the website exists and automatically extract the tool name and icon.
           </span>
         </div>
 
