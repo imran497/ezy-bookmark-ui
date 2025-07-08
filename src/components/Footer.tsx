@@ -12,12 +12,12 @@ export default function Footer() {
           </div>
           
           <div className="flex space-x-6">
-            <Link 
+            <a 
               href="https://ezybookmark.com/privacy" 
               className="text-gray-600 hover:text-gray-900 text-sm transition-colors"
             >
               Privacy Policy
-            </Link>
+            </a>
           </div>
         </div>
       </div>
