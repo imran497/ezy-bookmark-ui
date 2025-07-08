@@ -10,6 +10,7 @@ import CategoryFilter from '@/components/CategoryFilter';
 import FilterHeaderButton from '@/components/FilterHeaderButton';
 import ToolsHeaderActions from '@/components/ToolsHeaderActions';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import SearchBar from '@/components/SearchBar';
 import { Plus, Search } from 'lucide-react';
 import { useUser } from '@clerk/nextjs';
@@ -266,9 +267,9 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-base-100">
+    <div className="min-h-screen bg-base-100 flex flex-col">
       <Header />
-      <main className="container mx-auto px-4 py-8 max-w-7xl">
+      <main className="container mx-auto px-4 py-8 max-w-7xl flex-1">
         {/* Pinned Tools Section */}
         <PinnedSection
           pinnedTools={pinnedTools}
@@ -475,6 +476,7 @@ export default function Home() {
           onDone={handleDoneUnpinSelection}
         />
       </main>
+      <Footer />
     </div>
   );
 }

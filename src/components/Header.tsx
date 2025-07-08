@@ -1,7 +1,10 @@
+'use client';
+
 import { LogIn, User } from 'lucide-react';
 import { useUser, SignInButton, useClerk } from '@clerk/nextjs';
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Header() {
   const { isSignedIn, user } = useUser();
@@ -29,13 +32,15 @@ export default function Header() {
     <div className="bg-white border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         <div className="flex items-center gap-3 flex-shrink-0 min-w-0">
-          <Image
-            src="/logo.svg"
-            alt="EzyBookmark"
-            width={160}
-            height={32}
-            className="h-8"
-          />
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/logo.svg"
+              alt="EzyBookmark"
+              width={160}
+              height={32}
+              className="h-8 cursor-pointer"
+            />
+          </Link>
         </div>
         {isSignedIn ? (
           <div className="flex items-center gap-3 flex-shrink-0 ml-4">
