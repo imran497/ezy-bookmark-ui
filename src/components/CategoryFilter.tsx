@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { ChevronDown, ChevronUp, Filter } from 'lucide-react';
+// No imports needed - this component only renders filter badges
 
 interface CategoryFilterProps {
   categories: string[];
