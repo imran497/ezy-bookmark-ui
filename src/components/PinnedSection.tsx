@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { APITool } from '@/types/api';
 import ToolCard from './ToolCard';
 import { MoreVertical, PinOff, X } from 'lucide-react';

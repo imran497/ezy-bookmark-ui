@@ -19,7 +19,6 @@ export default function CategorySection({
   tools, 
   pinnedToolIds, 
   onVisit, 
-  onTogglePin,
   isSelectionMode = false,
   selectedToolIds = [],
   onToggleSelection

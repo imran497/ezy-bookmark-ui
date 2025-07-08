@@ -30,7 +30,7 @@ export default function Home() {
   const [isUnpinMode, setIsUnpinMode] = useState(false);
   const [selectedToolIds, setSelectedToolIds] = useState<string[]>([]);
   const [selectedUnpinIds, setSelectedUnpinIds] = useState<string[]>([]);
-  const [originalPinnedIds, setOriginalPinnedIds] = useState<string[]>([]);
+  const [, setOriginalPinnedIds] = useState<string[]>([]);
   const [filtersExpanded, setFiltersExpanded] = useState(false);
 
   useEffect(() => {
