@@ -6,27 +6,60 @@ import { useToast } from './Toast';
 interface AddToolModalProps {
   onClose: () => void;
   onAdd: (tool: CreateToolDto) => void;
+  categories?: string[];
 }
 
-export default function AddToolModal({ onClose, onAdd }: AddToolModalProps) {
+export default function AddToolModal({ onClose, onAdd, categories = [] }: AddToolModalProps) {
   const [url, setUrl] = useState('');
+  const [category, setCategory] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [urlError, setUrlError] = useState('');
   const { toast } = useToast();
+
+  const validateUrl = (urlString: string): string => {
+    if (!urlString.trim()) {
+      return 'URL is required';
+    }
+
+    // Basic URL format validation
+    try {
+      const url = new URL(urlString.trim());
+      if (!['http:', 'https:'].includes(url.protocol)) {
+        return 'URL must use HTTP or HTTPS protocol';
+      }
+      if (!url.hostname) {
+        return 'URL must have a valid domain name';
+      }
+      return '';
+    } catch {
+      return 'Please enter a valid URL (e.g., https://example.com)';
+    }
+  };
+
+  const handleUrlChange = (value: string) => {
+    setUrl(value);
+    if (urlError) {
+      setUrlError('');
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!url.trim()) {
-      toast('warning', 'Please enter a URL');
+    const validationError = validateUrl(url);
+    if (validationError) {
+      setUrlError(validationError);
       return;
     }
 
     setIsLoading(true);
+    setUrlError('');
 
     try {
-      // Just pass the URL - backend will handle normalization and defaults
+      // Pass URL and category if selected - backend will handle normalization and defaults
       const tool: CreateToolDto = {
-        url: url.trim()
+        url: url.trim(),
+        ...(category && { category })
       };
 
       await onAdd(tool);
@@ -36,15 +69,15 @@ export default function AddToolModal({ onClose, onAdd }: AddToolModalProps) {
       // Handle specific error messages from the API
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       if (errorMessage.includes('already exists')) {
-        toast('info', 'Tool already exists', 'This tool has already been added to the collection');
+        setUrlError('This tool has already been added to the collection');
       } else if (errorMessage.includes('Invalid URL')) {
-        toast('error', 'Invalid URL', 'Please enter a valid URL format');
+        setUrlError('Please enter a valid URL format');
       } else if (errorMessage.includes('not accessible') || errorMessage.includes('does not exist')) {
-        toast('error', 'Website not accessible', 'The website could not be reached. Please check the URL and try again.');
+        setUrlError('The website could not be reached. Please check the URL and try again.');
       } else if (errorMessage.includes('returned')) {
-        toast('error', 'Website error', 'The website returned an error. It may be temporarily unavailable.');
+        setUrlError('The website returned an error. It may be temporarily unavailable.');
       } else {
-        toast('error', 'Failed to add tool', 'Please try again or check your internet connection');
+        setUrlError('Failed to add tool. Please try again or check your internet connection.');
       }
     } finally {
       setIsLoading(false);
@@ -85,16 +118,53 @@ export default function AddToolModal({ onClose, onAdd }: AddToolModalProps) {
               Tool URL
             </label>
             <input
-              type="url"
+              type="text"
               value={url}
-              onChange={(e) => setUrl(e.target.value)}
+              onChange={(e) => handleUrlChange(e.target.value)}
               placeholder="https://chat.openai.com"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              required
+              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
+                urlError 
+                  ? 'border-red-300 focus:ring-red-500 focus:border-red-500' 
+                  : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'
+              }`}
               autoFocus
               disabled={isLoading}
             />
+            {urlError && (
+              <p className="mt-1 text-sm text-red-600 flex items-start">
+                <span className="flex-shrink-0 w-4 h-4 mt-0.5 mr-1">
+                  <svg fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                  </svg>
+                </span>
+                {urlError}
+              </p>
+            )}
           </div>
+
+          {categories.length > 0 && (
+            <div className="w-full">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Category (Optional)
+              </label>
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                disabled={isLoading}
+              >
+                <option value="">Auto-detect category</option>
+                {categories.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+              <p className="mt-1 text-xs text-gray-500">
+                Leave blank to automatically detect the category based on the website
+              </p>
+            </div>
+          )}
 
           <div className="flex gap-3 pt-2">
             <button

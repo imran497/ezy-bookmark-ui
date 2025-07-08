@@ -455,6 +455,7 @@ export default function Home() {
           <AddToolModal
             onClose={() => setShowAddModal(false)}
             onAdd={handleAddTool}
+            categories={categories}
           />
         )}
         
