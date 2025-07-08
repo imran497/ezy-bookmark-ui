@@ -305,7 +305,7 @@ export default function Home() {
               </div>
             </div>
             <p className="text-gray-600">
-              Results for &quot;{searchQuery}&quot;
+              Results for "{searchQuery}"
             </p>
             
             {unpinnedToolsData.length > 0 ? (
@@ -330,7 +330,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">No tools found</h3>
                 <p className="text-gray-600 mb-4">
-                  No tools match &quot;{searchQuery}&quot;. Try a different search term.
+                  No tools match "{searchQuery}". Try a different search term.
                 </p>
                 <button 
                   onClick={() => setSearchQuery('')}
